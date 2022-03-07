@@ -126,8 +126,6 @@ class DemoWebServer(CGIHTTPRequestHandler):
                 self.form.stream(base = self.basetmpl,
                                  title = "Demo Generation",
                                  handler = self,
-                                 genparams = self.genparams,
-                                 password = (not privatekeys.Keys.password),
                                  **kwargs).dump(self.wfile, encoding='utf-8')
 
     def exceptionString(self, excp):
