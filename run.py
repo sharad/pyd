@@ -63,6 +63,14 @@ class DemoWebServer(CGIHTTPRequestHandler):
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Demo</title><! — Maximum of 65 characters -->
+    <meta name=”description”
+          content=”Technical Academy provide you best learning resources for javascript and related frameworks.”> <! — Maximum of 155 characters -->
+    <meta property=”og:title” content=”Learn Technology “ /> <! — Maximum 35 characters -->
+    <meta property=”og:url” content=”https://www.example.com/webpage/" /> <! — Full link to your webpage address -->
+    <meta property=”og:description” content=”Technical Academy provide you best learning resources for javascript”> <! — Maximum 65 characters -->
+    <meta property=”og:image” content=”/download.png”> <! — Image(JPG or PNG) of size less than 300KB and minimum dimension of 300 x 200 pixel is advised -->
+    <meta property=”og:type” content=”article” />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
