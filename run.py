@@ -211,6 +211,9 @@ class DemoWebServer(CGIHTTPRequestHandler):
     def do_GET(self):
         try:
             print("calling do_GET")
+
+            print(f"self.path = {self.path}")
+
             self.processCookie()
             self.outputPage()
         except Exception as e:
