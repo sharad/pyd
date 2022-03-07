@@ -1,14 +1,10 @@
 
 
-FROM python3.8-slim
+FROM python3.11.0a5-slim-buster
 
+COPY run.py .
 
-RUN run.py
-
-
-
-
-
+ENTRYPOINT run.py
 
 
 
