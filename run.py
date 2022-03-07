@@ -9,7 +9,6 @@ from jinja2 import Environment, Template, BaseLoader
 from http.server import HTTPServer, CGIHTTPRequestHandler
 from random import randint
 from datetime import date,datetime
-from fastapi.encoders import jsonable_encoder
 import json
 from base64 import b64decode, b64encode
 from netifaces import interfaces, ifaddresses, AF_INET
@@ -32,8 +31,7 @@ class SessionStore:
         if SessionStore.sessionFile and os.path.exists(SessionStore.sessionFile):
             os.rename(SessionStore.sessionFile, SessionStore.sessionFile + ".backup")
         with open(SessionStore.sessionFile, 'wb') as f:
-            output = json.dumps(jsonable_encoder(SessionStore.sessionStore),
-                                indent    = 4,
+            output = json.dumps(indent    = 4,
                                 sort_keys = True ).encode('utf-8')
             f.write(output)
 
