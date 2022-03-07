@@ -61,8 +61,17 @@ class DemoWebServer(CGIHTTPRequestHandler):
 
     basetmpl = env.from_string("""
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
+
+    <title>The Rock (1996)</title>
+    <meta property="og:title" content="The Rock" />
+    <meta property="og:type" content="video.movie" />
+    <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" />
+    <meta property="og:image" content="https://ia.media-imdb.com/images/rock.jpg" />
+
+    <!--
+
     <title>Demo</title><! — Maximum of 65 characters -->
     <meta name=”description”
           content=”Technical Academy provide you best learning resources for javascript and related frameworks.”> <! — Maximum of 155 characters -->
@@ -71,6 +80,9 @@ class DemoWebServer(CGIHTTPRequestHandler):
     <meta property=”og:description” content=”Technical Academy provide you best learning resources for javascript”> <! — Maximum 65 characters -->
     <meta property=”og:image” content=”/download.png”> <! — Image(JPG or PNG) of size less than 300KB and minimum dimension of 300 x 200 pixel is advised -->
     <meta property=”og:type” content=”article” />
+
+    -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
