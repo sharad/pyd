@@ -23,7 +23,7 @@ class DemoWebError(Exception):
         self.errors = errors
 
 class SessionStore:
-    sessionFile = ".session-lmgenweb.pkl"
+    sessionFile = ".session-demo.pkl"
     sessionStore = {}
     @staticmethod
     def writeSessionFile():
@@ -158,13 +158,13 @@ class DemoWebServer(CGIHTTPRequestHandler):
         except Exception as e:
             self.exceptionPage(e)
 
-    clientSessionCookieName = "lmgenweb_session"
+    clientSessionCookieName = "demo_session"
 
     def processCookie(self):
         print("calling processCookie")
         cookies = self.parseCookies(self.headers["Cookie"])
         if self.clientSessionCookieName in cookies:
-            print("using lmgenweb_session from cookie")
+            print("using demo_session from cookie")
             self.sessionid = cookies[self.clientSessionCookieName]
         else:
             print("using new generated session")
@@ -173,7 +173,7 @@ class DemoWebServer(CGIHTTPRequestHandler):
         SessionStore.addSessionStore(self.sessionid)
 
         self.printSessionStore()
-        self.cookie = f"lmgenweb_session={self.sessionid}"
+        self.cookie = f"demo_session={self.sessionid}"
         print(f"current session {self.sessionid}")
 
         self.printSessionStore()
