@@ -1,6 +1,6 @@
 
 
-FROM python:3.11.0a5-slim-buster
+FROM python:3.8-slim
 
 RUN pip install jinja2 datetime json base64 netifaces traceback
 
