@@ -3,7 +3,6 @@
 # https://stackoverflow.com/questions/56383049/accessing-form-data-values-in-python-http-server-using-cgi-module
 
 import getopt, sys, os
-sys.path.append(os.path.dirname(os.path.realpath(__file__)) + '/../../backend/app')
 import cgi
 from jinja2 import Environment, Template, BaseLoader
 from http.server import HTTPServer, CGIHTTPRequestHandler
