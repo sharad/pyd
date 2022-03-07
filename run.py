@@ -1,5 +1,3 @@
-
-
 #!/usr/bin/env python3
 
 # https://stackoverflow.com/questions/56383049/accessing-form-data-values-in-python-http-server-using-cgi-module

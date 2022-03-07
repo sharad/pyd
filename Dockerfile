@@ -1,10 +1,12 @@
 
 
-FROM python3.11.0a5-slim-buster
+FROM python:3.11.0a5-slim-buster
 
-COPY run.py .
+COPY pip install jinja2
 
-ENTRYPOINT run.py
+COPY run.py /
+
+CMD /run.py
 
 
 
