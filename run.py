@@ -55,7 +55,7 @@ class SessionStore:
         if sessionid not in SessionStore.sessionStore:
             SessionStore.sessionStore[ sessionid ] = {}
 
-class DemoWebServer(CGIHTTPRequestHandler):
+class DemoWebServerBase(CGIHTTPRequestHandler):
 
     env = Environment(loader=BaseLoader())
 
@@ -70,18 +70,6 @@ class DemoWebServer(CGIHTTPRequestHandler):
     <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" />
     <meta property="og:image" content="https://ia.media-imdb.com/images/rock.jpg" />
 
-    <!--
-
-    <title>Demo</title>
-    <meta name=”description”
-          content=”Technical Academy provide you best learning resources for javascript and related frameworks.”>
-    <meta property=”og:title” content=”Learn Technology“/>
-    <meta property=”og:url” content=”https://www.example.com/webpage/"/>
-    <meta property=”og:description” content=”Technical Academy provide you best learning resources for javascript”>
-    <meta property=”og:image” content=”/download.png”>
-    <meta property=”og:type” content=”article” />
-
-    -->
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -159,17 +147,6 @@ class DemoWebServer(CGIHTTPRequestHandler):
         print(expstr)
         self.outputPage(exception = expstr)
 
-    def do_POST(self):
-        print("calling do_POST")
-        print(f"self.path=u{self.path}")
-        try:
-            ctype, pdict = cgi.parse_header(self.headers['content-type'])
-            content_len = int(self.headers.get('Content-length'))
-            self.processCookie()
-            self.outputPage()
-        except Exception as e:
-            self.exceptionPage(e)
-
     clientSessionCookieName = "demo_session"
 
     def processCookie(self):
@@ -219,6 +196,23 @@ class DemoWebServer(CGIHTTPRequestHandler):
         self.printSessionStore()
 
         return value
+
+
+
+class DemoWebServer(DemoWebServerBase):
+    def __init__(self, request, client_address, server):
+        DemoWebServerBase.__init__(self, request, client_address, server)
+
+    def do_POST(self):
+        print("calling do_POST")
+        print(f"self.path=u{self.path}")
+        try:
+            ctype, pdict = cgi.parse_header(self.headers['content-type'])
+            content_len = int(self.headers.get('Content-length'))
+            self.processCookie()
+            self.outputPage()
+        except Exception as e:
+            self.exceptionPage(e)
 
     def do_GET(self):
         try:
