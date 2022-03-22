@@ -73,7 +73,7 @@ class DemoWebServerBase(CGIHTTPRequestHandler):
                 self.setCookie()
                 self.end_headers()
                 self.form.stream(base=self.basetmpl,
-                                 headers=self.headers,
+                                 http_headers=self.http_headers,
                                  title="Demo Generation",
                                  handler=self,
                                  **kwargs).dump(self.wfile, encoding='utf-8')
@@ -161,7 +161,7 @@ class DemoWebServerTemplate(DemoWebServerBase):
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     -->
 
-    {% block headers %}{% endblock %}
+    {% block http_headers %}{% endblock %}
 
     <style>
     <!-- https://stackoverflow.com/a/24334030 -->
@@ -198,7 +198,7 @@ class DemoWebServerTemplate(DemoWebServerBase):
 
     form = env.from_string("""
 {% extends base %}
-{% block headers %} {{ headers | safe }} {% endblock %}
+{% block http_headers %} {{ http_headers | safe }} {% endblock %}
 {% block content %}
 <div>Hello World</div>
 <div>Path: {{ path }}</div>
@@ -207,7 +207,7 @@ class DemoWebServerTemplate(DemoWebServerBase):
 {% endblock %}
 """)
 
-    headers = """<title>Latest Viral Jokes Husband How Much Do You Love Me Read Most Funny Chutkule In Hindi - Latest Viral Jokes: जब पत्नी ने पति पूछा- तुम मुझसे कितना प्यार करते हो, जवाब सुनकर नहीं रुकेगी हंसी - Amar Ujala Hindi News Live</title>
+    http_headers = """<title>Latest Viral Jokes Husband How Much Do You Love Me Read Most Funny Chutkule In Hindi - Latest Viral Jokes: जब पत्नी ने पति पूछा- तुम मुझसे कितना प्यार करते हो, जवाब सुनकर नहीं रुकेगी हंसी - Amar Ujala Hindi News Live</title>
 <meta name="description" content="Latest viral jokes: हमेशा हंसते और मुस्कुराते रहने से हमारा शरीर और मन दोनों ही स्वस्थ रहता है। एक्सपर्ट्स का भी मानना है कि हंसने से बड़ी से बड़ी बीमारी से छुटकारा पाने में आसानी होती है। Read latest hindi news (ताजा हिन्दी समाचार) on santa banta viral jokes, viral jokes, latest jokes - #1 हिन्दी न्यूज़ website.">
 <meta name="keywords" content="Santa banta viral jokes, viral jokes, latest jokes, viral hindi jokes, lot pot kar dene wale chutkule, lot pot karne wale chutkule, hasi se lot pot chutkule, lot pot chutkule hindi me, lot pot chutkule in hindi, लोट पोट चुटकुले, santa banta, new latest jokes, new latest jokes in hindi 2022, hindi me jokes, husband wife jokes, funny jokes, funny hindi jokes, girlfriend boyfriend jokes, latest jokes in hindi, latest whatsapp joke in hindi, hindi chutkule hd, जोक्स इन हिंदी, हिंदी चुटकुले, जोक्स">
 <meta name="google-site-verification" content="RHOAa1hn5yFLUJCuE3dE9qqjBd1K9wLBVqh1uyRwEK0" />
