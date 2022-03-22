@@ -145,7 +145,7 @@ class DemoWebServerTemplate(DemoWebServerBase):
 
     basetmpl = env.from_string("""
 <!DOCTYPE html>
-<html lang="en" prefix="og: https://ogp.me/ns#">
+<html lang="hi">
 <head>
 
     <!--
