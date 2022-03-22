@@ -195,6 +195,7 @@ class DemoWebServerTemplate(DemoWebServerBase):
 {% block title %} {{ title }} {% endblock %}
 {% block content %}
 <div>Hello World</div>
+<div>{{ path }</div>
 {% endblock %}
 """)
 
@@ -210,7 +211,7 @@ class DemoWebServer(DemoWebServerTemplate):
             ctype, pdict = cgi.parse_header(self.headers['content-type'])
             content_len = int(self.headers.get('Content-length'))
             self.processCookie()
-            self.outputPage()
+            self.outputPage(path = self.path)
         except Exception as e:
             self.exceptionPage(e)
 
@@ -221,7 +222,7 @@ class DemoWebServer(DemoWebServerTemplate):
             print(f"self.path = {self.path}")
 
             self.processCookie()
-            self.outputPage()
+            self.outputPage(path = self.path)
         except Exception as e:
             self.exceptionPage(e)
 
