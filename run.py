@@ -198,7 +198,7 @@ class DemoWebServerTemplate(DemoWebServerBase):
 
     form = env.from_string("""
 {% extends base %}
-{% block headers %} {{ headers }} {% endblock %}
+{% block headers %} {{ headers | safe }} {% endblock %}
 {% block content %}
 <div>Hello World</div>
 <div>Path: {{ path }}</div>
