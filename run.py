@@ -280,7 +280,7 @@ class DemoWebServer(DemoWebServerTemplate):
 
 def main():
     args = []
-    port = 8080
+    port = 80
     host = '0.0.0.0'
 
     if len(sys.argv) > 1:

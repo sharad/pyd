@@ -2,7 +2,7 @@
 
 FROM python:3.8-slim
 
-EXPOSE 8080
+EXPOSE 80
 
 RUN pip install jinja2 netifaces
 
