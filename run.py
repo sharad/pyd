@@ -57,65 +57,6 @@ class SessionStore:
 
 class DemoWebServerBase(CGIHTTPRequestHandler):
 
-    env = Environment(loader=BaseLoader())
-
-    basetmpl = env.from_string("""
-<!DOCTYPE html>
-<html lang="en" prefix="og: https://ogp.me/ns#">
-<head>
-
-    <title>The Rock (1996)</title>
-    <meta property="og:title" content="The Rock" />
-    <meta property="og:type" content="video.movie" />
-    <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" />
-    <meta property="og:image" content="https://ia.media-imdb.com/images/rock.jpg" />
-
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <style>
-    <!-- https://stackoverflow.com/a/24334030 -->
-    pre {
-      font-size: inherit;
-      color: inherit;
-      border: initial;
-      padding: initial;
-      font-family: inherit;
-    }
-    </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
-    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
-    <title>{% block title %}{% endblock %}</title>
-</head>
-<body>
-    <div class="container">
-      <h2>Demo gen</h2>
-      <br>
-      {% block content %}{% endblock %}
-      <br>
-    </div>
-    <div class="debug">
-    {% if exception %}
-      <h2>A exception occurred, Please report this text to dev team.</h2>
-      <pre>
-{{ exception | e }}
-      </pre>
-    {% endif %}
-    </div>
-</body>
-</html>
-""")
-
-    form = env.from_string("""
-{% extends base %}
-{% block title %} {{ title }} {% endblock %}
-{% block content %}
-<div>Hello World</div>
-{% endblock %}
-""")
-
-
     def __init__(self, request, client_address, server):
         CGIHTTPRequestHandler.__init__(self, request, client_address, server)
 
@@ -197,9 +138,68 @@ class DemoWebServerBase(CGIHTTPRequestHandler):
 
         return value
 
+class DemoWebServerTemplate(DemoWebServerBase):
+
+    env = Environment(loader=BaseLoader())
+
+    basetmpl = env.from_string("""
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+
+    <title>The Rock (1996)</title>
+    <meta property="og:title" content="The Rock" />
+    <meta property="og:type" content="video.movie" />
+    <meta property="og:url" content="https://www.imdb.com/title/tt0117500/" />
+    <meta property="og:image" content="https://ia.media-imdb.com/images/rock.jpg" />
 
 
-class DemoWebServer(DemoWebServerBase):
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+    <!-- https://stackoverflow.com/a/24334030 -->
+    pre {
+      font-size: inherit;
+      color: inherit;
+      border: initial;
+      padding: initial;
+      font-family: inherit;
+    }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.min.js"></script>
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="container">
+      <h2>Demo gen</h2>
+      <br>
+      {% block content %}{% endblock %}
+      <br>
+    </div>
+    <div class="debug">
+    {% if exception %}
+      <h2>A exception occurred, Please report this text to dev team.</h2>
+      <pre>
+{{ exception | e }}
+      </pre>
+    {% endif %}
+    </div>
+</body>
+</html>
+""")
+
+    form = env.from_string("""
+{% extends base %}
+{% block title %} {{ title }} {% endblock %}
+{% block content %}
+<div>Hello World</div>
+{% endblock %}
+""")
+
+
+class DemoWebServer(DemoWebServerTemplate):
     def __init__(self, request, client_address, server):
         DemoWebServerBase.__init__(self, request, client_address, server)
 
