@@ -195,7 +195,7 @@ class DemoWebServerTemplate(DemoWebServerBase):
 {% block title %} {{ title }} {% endblock %}
 {% block content %}
 <div>Hello World</div>
-<div>{{ path }</div>
+<div>{{ path }}</div>
 {% endblock %}
 """)
 
