@@ -206,8 +206,8 @@ class DemoWebServerTemplate(DemoWebServerBase):
 <div>PORT: {{ port }}</div>
 
     <div>
-    {% for h in headers %}
-    <p>{{ h }}</p>
+    {% for hk, hv in headers %}
+    <p>{{ hk }}={{ hv }}</p>
     {% endfor %}
     </div>
 {% endblock %}
