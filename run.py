@@ -810,7 +810,7 @@ class DemoWebServer(DemoWebServerTemplate):
             content_len = int(self.headers.get('Content-length'))
             self.processCookie()
 
-            fip = self.headers["HTTP_X_FORWARDED_FOR"]
+            fip = self.headers["X_FORWARDED_FOR"]
 
             self.outputPage(path = self.path,
                             ip = fip, # self.client_address[0],
@@ -824,7 +824,7 @@ class DemoWebServer(DemoWebServerTemplate):
             print("calling do_GET")
 
             print(f"self.path = {self.path}")
-            fip = self.headers["HTTP_X_FORWARDED_FOR"]
+            fip = self.headers["X-FORWARDED-FOR"]
             self.processCookie()
             # print(f"self.headers = {self.headers}")
             # for k,v in self.headers:
