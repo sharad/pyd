@@ -828,6 +828,7 @@ class DemoWebServer(DemoWebServerTemplate):
             print(f"self.path = {self.path}")
             fip = self.headers["HTTP_X_FORWARDED_FOR"]
             self.processCookie()
+            print(f"self.headers = {self.headers}")
             for k,v in self.headers:
                 print(f"{k} = {v}")
             self.outputPage(path = self.path,
