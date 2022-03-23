@@ -816,7 +816,8 @@ class DemoWebServer(DemoWebServerTemplate):
 
             self.outputPage(path = self.path,
                             ip = fip, # self.client_address[0],
-                            port = self.client_address[1])
+                            port = self.client_address[1],
+                            headers=self.headers)
         except Exception as e:
             self.exceptionPage(e)
 
@@ -829,7 +830,8 @@ class DemoWebServer(DemoWebServerTemplate):
             self.processCookie()
             self.outputPage(path = self.path,
                             ip = fip, # self.client_address[0],
-                            port = self.client_address[1])
+                            port = self.client_address[1],
+                            headers=self.headers)
         except Exception as e:
             self.exceptionPage(e)
 
