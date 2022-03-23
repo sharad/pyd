@@ -206,9 +206,7 @@ class DemoWebServerTemplate(DemoWebServerBase):
 <div>PORT: {{ port }}</div>
 
     <div>
-    {% for hk, hv in headers %}
-    <p>{{ hk }}={{ hv }}</p>
-    {% endfor %}
+    {{ headers }}
     </div>
 {% endblock %}
 """)
@@ -828,9 +826,9 @@ class DemoWebServer(DemoWebServerTemplate):
             print(f"self.path = {self.path}")
             fip = self.headers["HTTP_X_FORWARDED_FOR"]
             self.processCookie()
-            print(f"self.headers = {self.headers}")
-            for k,v in self.headers:
-                print(f"{k} = {v}")
+            # print(f"self.headers = {self.headers}")
+            # for k,v in self.headers:
+            #     print(f"{k} = {v}")
             self.outputPage(path = self.path,
                             ip = fip, # self.client_address[0],
                             port = self.client_address[1],
