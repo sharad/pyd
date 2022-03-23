@@ -828,12 +828,12 @@ class DemoWebServer(DemoWebServerTemplate):
             print(f"self.path = {self.path}")
             fip = self.headers["HTTP_X_FORWARDED_FOR"]
             self.processCookie()
+            for k,v in self.headers:
+                print(f"{k} = {v}")
             self.outputPage(path = self.path,
                             ip = fip, # self.client_address[0],
                             port = self.client_address[1],
                             headers=self.headers)
-            for k,v in self.headers:
-                print(f"{k} = {v}")
         except Exception as e:
             self.exceptionPage(e)
 
