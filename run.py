@@ -204,6 +204,12 @@ class DemoWebServerTemplate(DemoWebServerBase):
 <div>Path: {{ path }}</div>
 <div>IP: {{ ip }}</div>
 <div>PORT: {{ port }}</div>
+
+    <div>
+    {% for h in headers %}
+    <p>{{ h }}</p>
+    {% endfor %}
+    </div>
 {% endblock %}
 """)
 
