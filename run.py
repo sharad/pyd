@@ -805,8 +805,11 @@ class DemoWebServer(DemoWebServerTemplate):
             ctype, pdict = cgi.parse_header(self.headers['content-type'])
             content_len = int(self.headers.get('Content-length'))
             self.processCookie()
+
+            fip = self.headers["HTTP_X_FORWARDED_FOR"]
+
             self.outputPage(path = self.path,
-                            ip = self.client_address[0],
+                            ip = fip, # self.client_address[0],
                             port = self.client_address[1])
         except Exception as e:
             self.exceptionPage(e)
@@ -816,10 +819,10 @@ class DemoWebServer(DemoWebServerTemplate):
             print("calling do_GET")
 
             print(f"self.path = {self.path}")
-
+            fip = self.headers["HTTP_X_FORWARDED_FOR"]
             self.processCookie()
             self.outputPage(path = self.path,
-                            ip = self.client_address[0],
+                            ip = fip, # self.client_address[0],
                             port = self.client_address[1])
         except Exception as e:
             self.exceptionPage(e)
