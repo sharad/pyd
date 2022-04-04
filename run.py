@@ -802,7 +802,7 @@ console.log('interstitialSlot loaded');
 
 
     def __init__(self, request, client_address, server):
-        super().__init__(self, request, client_address, server)
+        super().__init__(request, client_address, server)
 
 class DemoWebServer(DemoWebServerTemplate):
 
@@ -814,7 +814,7 @@ class DemoWebServer(DemoWebServerTemplate):
         self.handler = ipinfo.getHandler(ipinfoToken)
         print(f"running handler2")
         logging.warning(f"running handler2")
-        super().__init__(self, request, client_address, server)
+        super().__init__(request, client_address, server)
 
     def ipaddr(self):
         if "X-FORWARDED-FOR" in self.headers:
