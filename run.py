@@ -95,7 +95,7 @@ class DemoWebServerBase(CGIHTTPRequestHandler):
 
     def processCookie(self):
         print("calling processCookie")
-        cookies = self.parseCookies(self.headers["Cookie"])
+        self.cookies = self.parseCookies(self.headers["Cookie"])
         if self.clientSessionCookieName in cookies:
             print("using demo_session from cookie")
             self.sessionid = cookies[self.clientSessionCookieName]
@@ -802,19 +802,19 @@ console.log('interstitialSlot loaded');
 
 
     def __init__(self, request, client_address, server):
-        DemoWebServerBase.__init__(self, request, client_address, server)
+        super().__init__(self, request, client_address, server)
 
 class DemoWebServer(DemoWebServerTemplate):
 
 
     def __init__(self, request, client_address, server):
-        DemoWebServerTemplate.__init__(self, request, client_address, server)
         ipinfoToken = "c53137462a1a1a"
         print(f"running handler1")
         logging.warning(f"running handler1")
         self.handler = ipinfo.getHandler(ipinfoToken)
         print(f"running handler2")
         logging.warning(f"running handler2")
+        super().__init__(self, request, client_address, server)
 
     def ipaddr(self):
         if "X-FORWARDED-FOR" in self.headers:
