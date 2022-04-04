@@ -832,15 +832,15 @@ class DemoWebServer(DemoWebServerTemplate):
         _ipdetail = self.ipinfo()
         print(f"_ipdetail={_ipdetail.all}")
         if 'bogon' in _ipdetail.details:
-            city=_ipdetail.city
-            country=_ipdetail.country
-            loc=_ipdetail.loc
-            ip=_ipdetail.ip
-        else:
             city="none"
             country="none"
             loc="none"
             ip="none"
+        else:
+            city=_ipdetail.city
+            country=_ipdetail.country
+            loc=_ipdetail.loc
+            ip=_ipdetail.ip
 
         return f"req from {ip} {city} {country} {loc}"
 
