@@ -15,6 +15,7 @@ import traceback
 import google.cloud.logging as logging
 import logging
 import ipinfo
+import pprint
 
 class DemoWebError(Exception):
     def __init__(self, *, code, message, errors):
@@ -830,11 +831,12 @@ class DemoWebServer(DemoWebServerTemplate):
 
     def ipdetail(self):
         _ipdetail = self.ipinfo()
-        print(f"_ipdetail={_ipdetail}")
-        city=(_ipdetail["city"] if "city" in _ipdetail else "none")
-        country=(_ipdetail["country"] if "country" in _ipdetail else "none")
-        loc=(_ipdetail["loc"] if "loc" in _ipdetail else "none")
-        ip=(_ipdetail["ip"] if "ip" in _ipdetail else "none")
+        pprint.pprint(_ipdetail.all)
+        print(f"_ipdetail={_ipdetail.all}")
+        city=_ipdetail.city
+        country=_ipdetail.country
+        loc=_ipdetail.loc
+        ip=self.ipaddr()
 
         return f"req from {ip} {city} {country} {loc}"
 
