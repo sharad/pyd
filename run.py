@@ -808,7 +808,7 @@ class DemoWebServer(DemoWebServerTemplate):
         ipinfoToken = "c53137462a1a1a"
         handler = ipinfo.getHandler(ipinfoToken)
 
-    def ipddr(self):
+    def ipaddr(self):
         if "X-FORWARDED-FOR" in self.headers:
             ip = self.headers["X-FORWARDED-FOR"]
         else:
@@ -849,6 +849,7 @@ class DemoWebServer(DemoWebServerTemplate):
             print(f"self.path = {self.path}")
             fip = self.ipdetail()
             logging.warning(f"{fip}")
+
             self.processCookie()
             self.outputPage(path = self.path,
                             ip = fip, # self.client_address[0],
