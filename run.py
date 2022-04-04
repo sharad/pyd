@@ -831,11 +831,11 @@ class DemoWebServer(DemoWebServerTemplate):
     def ipdetail(self):
         _ipdetail = self.ipinfo()
         print(f"_ipdetail={_ipdetail}")
-        city=if ip in _ipdetail: _ipdetail["city"] else: "none"
-        country=if ip in _ipdetail: _ipdetail["country"] else: "none"
-        loc=if ip in _ipdetail: _ipdetail["loc"] else: "none"
-        ip=if ip in _ipdetail: _ipdetail["ip"] else: "none"
-        
+        city=(_ipdetail["city"] if ip in _ipdetail else "none")
+        country=(_ipdetail["country"] if ip in _ipdetail: else "none")
+        loc=(_ipdetail["loc"] if ip in _ipdetail: else "none")
+        ip=(_ipdetail["ip"] if ip in _ipdetail else "none")
+
         return f"req from {ip} {city} {country} {loc}"
 
     def do_POST(self):
