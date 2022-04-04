@@ -4,7 +4,7 @@ FROM python:3.8-slim
 
 EXPOSE 80
 
-RUN pip install jinja2 netifaces
+RUN pip install -r requirements.txt
 
 COPY run.py /
 
