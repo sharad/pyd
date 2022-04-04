@@ -811,8 +811,10 @@ class DemoWebServer(DemoWebServerTemplate):
         DemoWebServerTemplate.__init__(self, request, client_address, server)
         ipinfoToken = "c53137462a1a1a"
         print(f"running handler1")
+        logging.warning(f"running handler1")
         self.handler = ipinfo.getHandler(ipinfoToken)
         print(f"running handler2")
+        logging.warning(f"running handler2")
 
     def ipaddr(self):
         if "X-FORWARDED-FOR" in self.headers:
