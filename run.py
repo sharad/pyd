@@ -808,13 +808,21 @@ class DemoWebServer(DemoWebServerTemplate):
         ipinfoToken = "c53137462a1a1a"
         handler = ipinfo.getHandler(ipinfoToken)
 
-    def ipddr():
-        return self.headers["X-FORWARDED-FOR"]
+    def ipddr(self):
+        if "X-FORWARDED-FOR" in self.headers:
+            ip = self.headers["X-FORWARDED-FOR"]
+        else:
+            ip = self.client_address[0]
+        return ip
 
-    def ipinfo(ipaddr):
+    def ipinfo(self):
         ip = self.ipaddr()
         logging.warning(f"req from {ip}")
         return handler.getDetails(ip)
+
+    def ipdetail(self):
+        _ipdetail = self.ipinfo()
+        return f"req from {_ipdetail.ip} {_ipdetail.city} {_ipdetail.country} {_ipdetail.loc}"
 
     def do_POST(self):
         print("calling do_POST")
@@ -824,8 +832,8 @@ class DemoWebServer(DemoWebServerTemplate):
             content_len = int(self.headers.get('Content-length'))
             self.processCookie()
 
-            ipdetail = self.ipinfo()
-            logging.warning(f"req from {fip} {ipdetail.city} {ipdetail.country} {ipdetail.loc}")
+            fip = self.ipdetail()
+            logging.warning(f"{fip}")
 
             self.outputPage(path = self.path,
                             ip = fip, # self.client_address[0],
@@ -839,12 +847,9 @@ class DemoWebServer(DemoWebServerTemplate):
             print("calling do_GET")
 
             print(f"self.path = {self.path}")
-            ipdetail = self.ipinfo()
-            logging.warning(f"req from {fip} {ipdetail.city} {ipdetail.country} {ipdetail.loc}")
+            fip = self.ipdetail()
+            logging.warning(f"{fip}")
             self.processCookie()
-            # print(f"self.headers = {self.headers}")
-            # for k,v in self.headers:
-            #     print(f"{k} = {v}")
             self.outputPage(path = self.path,
                             ip = fip, # self.client_address[0],
                             port = self.client_address[1],
