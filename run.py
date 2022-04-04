@@ -96,7 +96,7 @@ class DemoWebServerBase(CGIHTTPRequestHandler):
     def processCookie(self):
         print("calling processCookie")
         self.cookies = self.parseCookies(self.headers["Cookie"])
-        if self.clientSessionCookieName in cookies:
+        if self.clientSessionCookieName in self.cookies:
             print("using demo_session from cookie")
             self.sessionid = cookies[self.clientSessionCookieName]
         else:
@@ -850,7 +850,7 @@ class DemoWebServer(DemoWebServerTemplate):
         try:
             ctype, pdict = cgi.parse_header(self.headers['content-type'])
             content_len = int(self.headers.get('Content-length'))
-            # self.processCookie()
+            self.processCookie()
 
             fip = self.ipdetail()
             logging.warning(f"{fip}")
@@ -870,7 +870,7 @@ class DemoWebServer(DemoWebServerTemplate):
             fip = self.ipdetail()
             logging.warning(f"{fip}")
 
-            # self.processCookie()
+            self.processCookie()
             self.outputPage(path = self.path,
                             ip = fip, # self.client_address[0],
                             port = self.client_address[1],
