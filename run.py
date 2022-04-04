@@ -870,7 +870,7 @@ class DemoWebServer(DemoWebServerTemplate):
             fip = self.ipdetail()
             logging.warning(f"{fip}")
 
-            self.processCookie()
+            # self.processCookie()
             self.outputPage(path = self.path,
                             ip = fip, # self.client_address[0],
                             port = self.client_address[1],
