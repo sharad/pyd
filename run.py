@@ -806,7 +806,7 @@ class DemoWebServer(DemoWebServerTemplate):
     def __init__(self, request, client_address, server):
         DemoWebServerBase.__init__(self, request, client_address, server)
         ipinfoToken = "c53137462a1a1a"
-        handler = ipinfo.getHandler(ipinfoToken)
+        self.handler = ipinfo.getHandler(ipinfoToken)
 
     def ipaddr(self):
         if "X-FORWARDED-FOR" in self.headers:
@@ -818,7 +818,7 @@ class DemoWebServer(DemoWebServerTemplate):
     def ipinfo(self):
         ip = self.ipaddr()
         logging.warning(f"req from {ip}")
-        return handler.getDetails(ip)
+        return self.handler.getDetails(ip)
 
     def ipdetail(self):
         _ipdetail = self.ipinfo()
