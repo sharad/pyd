@@ -801,15 +801,20 @@ console.log('interstitialSlot loaded');
 </script>"""
 
 class DemoWebServer(DemoWebServerTemplate):
-    
+
 
     def __init__(self, request, client_address, server):
         DemoWebServerBase.__init__(self, request, client_address, server)
         ipinfoToken = "c53137462a1a1a"
         handler = ipinfo.getHandler(ipinfoToken)
 
+    def ipddr():
+        return self.headers["X-FORWARDED-FOR"]
+
     def ipinfo(ipaddr):
-        return handler.getDetails(ipaddr)
+        ip = self.ipaddr()
+        logging.warning(f"req from {ip}")
+        return handler.getDetails(ip)
 
     def do_POST(self):
         print("calling do_POST")
@@ -819,8 +824,7 @@ class DemoWebServer(DemoWebServerTemplate):
             content_len = int(self.headers.get('Content-length'))
             self.processCookie()
 
-            fip = self.headers["X_FORWARDED_FOR"]
-            ipdetail = self.ipinfo(fip)
+            ipdetail = self.ipinfo()
             logging.warning(f"req from {fip} {ipdetail.city} {ipdetail.country} {ipdetail.loc}")
 
             self.outputPage(path = self.path,
@@ -835,8 +839,7 @@ class DemoWebServer(DemoWebServerTemplate):
             print("calling do_GET")
 
             print(f"self.path = {self.path}")
-            fip = self.headers["X-FORWARDED-FOR"]
-            ipdetail = self.ipinfo(fip)
+            ipdetail = self.ipinfo()
             logging.warning(f"req from {fip} {ipdetail.city} {ipdetail.country} {ipdetail.loc}")
             self.processCookie()
             # print(f"self.headers = {self.headers}")
