@@ -14,7 +14,7 @@ from netifaces import interfaces, ifaddresses, AF_INET
 import traceback
 import google.cloud.logging as logging
 import logging
-
+import ipinfo
 
 class DemoWebError(Exception):
     def __init__(self, *, code, message, errors):
@@ -801,8 +801,15 @@ console.log('interstitialSlot loaded');
 </script>"""
 
 class DemoWebServer(DemoWebServerTemplate):
+    
+
     def __init__(self, request, client_address, server):
         DemoWebServerBase.__init__(self, request, client_address, server)
+        ipinfoToken = "c53137462a1a1a"
+        handler = ipinfo.getHandler(ipinfoToken)
+
+    def ipinfo(ipaddr):
+        return handler.getDetails(ipaddr)
 
     def do_POST(self):
         print("calling do_POST")
@@ -813,6 +820,8 @@ class DemoWebServer(DemoWebServerTemplate):
             self.processCookie()
 
             fip = self.headers["X_FORWARDED_FOR"]
+            ipdetail = self.ipinfo(fip)
+            logging.warning(f"req from {fip} {ipdetail.city} {ipdetail.country} {ipdetail.loc}")
 
             self.outputPage(path = self.path,
                             ip = fip, # self.client_address[0],
@@ -827,7 +836,8 @@ class DemoWebServer(DemoWebServerTemplate):
 
             print(f"self.path = {self.path}")
             fip = self.headers["X-FORWARDED-FOR"]
-            logging.warning(f"req from {fip}")
+            ipdetail = self.ipinfo(fip)
+            logging.warning(f"req from {fip} {ipdetail.city} {ipdetail.country} {ipdetail.loc}")
             self.processCookie()
             # print(f"self.headers = {self.headers}")
             # for k,v in self.headers:

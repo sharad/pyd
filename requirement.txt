@@ -1,3 +1,5 @@
 google.cloud.logging
 jinja2
 netifaces
+ipinfo
+
