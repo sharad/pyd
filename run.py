@@ -15,7 +15,6 @@ import traceback
 import google.cloud.logging as logging
 import logging
 import ipinfo
-import pprint
 
 class DemoWebError(Exception):
     def __init__(self, *, code, message, errors):
@@ -831,7 +830,6 @@ class DemoWebServer(DemoWebServerTemplate):
 
     def ipdetail(self):
         _ipdetail = self.ipinfo()
-        pprint.pprint(_ipdetail.all)
         print(f"_ipdetail={_ipdetail.all}")
         city=_ipdetail.city
         country=_ipdetail.country
