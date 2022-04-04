@@ -850,7 +850,7 @@ class DemoWebServer(DemoWebServerTemplate):
         try:
             ctype, pdict = cgi.parse_header(self.headers['content-type'])
             content_len = int(self.headers.get('Content-length'))
-            self.processCookie()
+            # self.processCookie()
 
             fip = self.ipdetail()
             logging.warning(f"{fip}")
