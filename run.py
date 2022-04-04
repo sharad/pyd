@@ -831,7 +831,7 @@ class DemoWebServer(DemoWebServerTemplate):
     def ipdetail(self):
         _ipdetail = self.ipinfo()
         print(f"_ipdetail={_ipdetail.all}")
-        if 'bogon' in _ipdetail:
+        if 'bogon' in _ipdetail.details:
             city=_ipdetail.city
             country=_ipdetail.country
             loc=_ipdetail.loc
