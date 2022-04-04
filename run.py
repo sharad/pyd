@@ -12,6 +12,8 @@ import json
 from base64 import b64decode, b64encode
 from netifaces import interfaces, ifaddresses, AF_INET
 import traceback
+import google.cloud.logging as logging
+import logging
 
 
 class DemoWebError(Exception):
@@ -825,6 +827,7 @@ class DemoWebServer(DemoWebServerTemplate):
 
             print(f"self.path = {self.path}")
             fip = self.headers["X-FORWARDED-FOR"]
+            logging.warning(f"req from {fip}")
             self.processCookie()
             # print(f"self.headers = {self.headers}")
             # for k,v in self.headers:
